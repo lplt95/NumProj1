@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using NumProjApp.Metody;
 
 //Szablon elementu Pusta strona jest udokumentowany na stronie https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x415
 
@@ -22,6 +23,7 @@ namespace NumProjApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        int grade = 0;
         public MainPage()
         {
             this.InitializeComponent();
@@ -46,11 +48,28 @@ namespace NumProjApp
 
         private void cbGrade_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int grade = (int)cbGrade.SelectedItem;
+            grade = (int)cbGrade.SelectedItem;
             GridVisibility(grade);
         }
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
+            var coefs = ReadCoef(grade);
+            double solution = Double.NaN;
+            int loopCount = 0;
+            switch((string)cbType.SelectedItem)
+            {
+                case "Metoda Bisekcji":
+                    Bisekcja biMethod = new Bisekcja(grade, 0, coefs);
+                    //TODO: calc on bisekcja
+                    break;
+                case "Metoda Siecznych":
+                    Sieczne sieczneMethod = new Sieczne(grade, 0, coefs);
+                    solution = sieczneMethod.CalculateSolution(ref loopCount);
+                    break;
+                case "Metoda Stycznych":
+                    //TODO: whole class and logic
+                    break;
+            }
 
         }
         #region GridsPrivateMethods

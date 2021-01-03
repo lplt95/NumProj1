@@ -122,6 +122,10 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Metody\Bisekcja.cs" />
+    <Compile Include="Metody\General.cs" />
+    <Compile Include="Metody\Sieczne.cs" />
+    <Compile Include="Metody\Styczne.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
