@@ -10,7 +10,7 @@
 
     <Grid Name="MainGrid">
         <StackPanel Margin="100, 100, 0, 0">
-            <ComboBox x:Name="cbType" Width="160"/>
+            <ComboBox x:Name="cbType" Width="160" SelectedIndex="0"/>
         </StackPanel>
         <TextBlock x:Name="tbMethods" Text="Wybierz metodę rozwiązania:" FontSize="16" Margin="100, 60, 0, 0" TextWrapping="Wrap"/>
         <TextBlock x:Name="tbGrade" Text="Wybierz stopień równania:" FontSize="16" Margin="500, 60, 0, 0" TextWrapping="Wrap"/>
@@ -77,6 +77,26 @@
             </Grid>
             <Button Name="GenerateButton" HorizontalAlignment="Left" Margin="240, -150, 0, 0" Content="Oblicz!" Click="GenerateButton_Click"/>
         </Grid>
-
+        <Grid Name="SolutionGrid" Margin="100, 410, 0, 150" Visibility="Collapsed">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Margin" Value="0, 0, 5, 0"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <TextBlock Text="Pierwiastek równania wynosi:"/>
+                <TextBlock Name="tbSolution" Text=""/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <TextBlock Text="Wynik osiągnięto w "/>
+                <TextBlock Name="tbItCount" Text=""/>
+                <TextBlock Text="iteracjach"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

@@ -93,6 +93,9 @@ namespace NumProjApp
                 {
                     //TODO: wartości funkcji na końcach przedziału nie mają róznych znaków, brak miejsc zerowych w przedziale
                 }
+                tbItCount.Text = loopCount.ToString();
+                tbSolution.Text = solution.ToString();
+                SolutionGrid.Visibility = Visibility.Visible;
             }
             else
             {
@@ -129,6 +132,7 @@ namespace NumProjApp
             GridE.Visibility = Visibility.Collapsed;
             GridF.Visibility = Visibility.Collapsed;
             GridG.Visibility = Visibility.Collapsed;
+            SolutionGrid.Visibility = Visibility.Collapsed;
         }
         private Dictionary<int, double> ReadCoef(int grade)//ta metoda służy do bezpośredniego zczytywania współczynników, w zależności od stopnia równania
         {
