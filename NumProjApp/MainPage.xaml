@@ -17,34 +17,63 @@
         <TextBlock x:Name="tbCorrection" Text="Podaj dokładność rozwiązania:" FontSize="16" Margin="500, 160, 0, 0" TextWrapping="Wrap"/>
         <ComboBox x:Name="cbGrade" Width="120" Margin="500, 100, 0, 0" SelectedIndex="0" SelectionChanged="cbGrade_SelectionChanged"/>
         <ComboBox x:Name="cbCorrection" Width="120" Margin="500, 200, 0, 0" SelectedIndex="0"/>
+        <TextBlock x:Name="tbRange" Text="Podaj zakres obliczeń:" FontSize="16" Margin="100, 160, 0, 0"/>
+        <StackPanel Margin="100, 200, 700, 400" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="0,0,15,0"/>
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="0,0,15,0"/>
+                    <Setter Property="FontSize" Value="20"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBox x:Name="tbRange1"/>
+            <TextBlock Text=":"/>
+            <TextBox x:Name="tbRange2"/>
+        </StackPanel>
         <Grid Name="GridsGrid" Margin="100, 260, 0, 0">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="28,0,0,0"/>
+                    <Setter Property="TextWrapping" Value="Wrap"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="0,35,0,0"/>
+                    <Setter Property="TextWrapping" Value="Wrap"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                </Style>
+            </Grid.Resources>
             <Grid Name="GridA" Margin="0, 0, 840, 280">
-                <TextBlock x:Name="coef1" HorizontalAlignment="Left" Margin="28,0,0,0" Text="A" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbcoef1" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBlock x:Name="coef1" Text="A"/>
+                <TextBox x:Name="tbcoef1"/>
             </Grid>
             <Grid Name="GridB" Margin="80, 0, 760, 280">
-                <TextBlock x:Name="coef2" HorizontalAlignment="Left" Margin="28,0,0,0" Text="B" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbcoef2" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBlock x:Name="coef2" Text="B"/>
+                <TextBox x:Name="tbcoef2"/>
             </Grid>
             <Grid Name="GridC" Margin="160, 0, 680, 280">
-                <TextBlock x:Name="coef3" HorizontalAlignment="Left" Margin="28,0,0,0" Text="C" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbcoef3" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBlock x:Name="coef3" Text="C"/>
+                <TextBox x:Name="tbcoef3"/>
             </Grid>
             <Grid Name="GridD" Margin="240, 0, 600, 280">
-                <TextBlock x:Name="coef4" HorizontalAlignment="Left" Margin="28,0,0,0" Text="D" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbcoef4" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBlock x:Name="coef4" Text="D"/>
+                <TextBox x:Name="tbcoef4"/>
             </Grid>
             <Grid Name="GridE" Margin="320, 0, 520, 280">
-                <TextBlock x:Name="coef5" HorizontalAlignment="Left" Margin="28,0,0,0" Text="E" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbcoef5" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBlock x:Name="coef5" Text="E"/>
+                <TextBox x:Name="tbcoef5"/>
             </Grid>
             <Grid Name="GridF" Margin="400, 0, 440, 280">
-                <TextBlock x:Name="coef6" HorizontalAlignment="Left" Margin="28,0,0,0" Text="F" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbcoef6" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBlock x:Name="coef6" Text="F"/>
+                <TextBox x:Name="tbcoef6"/>
             </Grid>
             <Grid Name="GridG" Margin="480, 0, 360, 280">
-                <TextBlock x:Name="coef7" HorizontalAlignment="Left" Margin="28,0,0,0" Text="G" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                <TextBox x:Name="tbcoef7" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBlock x:Name="coef7" Text="G"/>
+                <TextBox x:Name="tbcoef7"/>
             </Grid>
             <Button Name="GenerateButton" HorizontalAlignment="Left" Margin="240, -150, 0, 0" Content="Oblicz!" Click="GenerateButton_Click"/>
         </Grid>

@@ -53,22 +53,48 @@ namespace NumProjApp
         }
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            var coefs = ReadCoef(grade);
-            double solution = Double.NaN;
-            int loopCount = 0;
-            switch((string)cbType.SelectedItem)
+            if (Validate())
             {
-                case "Metoda Bisekcji":
-                    Bisekcja biMethod = new Bisekcja(grade, 0, coefs);
-                    //TODO: calc on bisekcja
-                    break;
-                case "Metoda Siecznych":
-                    Sieczne sieczneMethod = new Sieczne(grade, 0, coefs);
-                    solution = sieczneMethod.CalculateSolution(ref loopCount);
-                    break;
-                case "Metoda Stycznych":
-                    //TODO: whole class and logic
-                    break;
+                Dictionary<int, double> coefs;
+                double range1, range2;
+                try
+                {
+                    coefs = ReadCoef(grade);
+                    var range = ReadRange();
+                    range1 = range.Key;
+                    range2 = range.Value;
+                }
+                catch (ArgumentNullException nullExc)
+                {
+
+                    return;
+                }
+                catch (FormatException formatExc)
+                {
+
+                    return;
+                }
+
+                double solution = Double.NaN;
+                int loopCount = 0;
+                switch ((string)cbType.SelectedItem)
+                {
+                    case "Metoda Bisekcji":
+                        Bisekcja biMethod = new Bisekcja(grade, 0, coefs);
+                        //TODO: calc on bisekcja
+                        break;
+                    case "Metoda Siecznych":
+                        Sieczne sieczneMethod = new Sieczne(grade, 0, coefs);
+                        solution = sieczneMethod.CalculateSolution(ref loopCount);
+                        break;
+                    case "Metoda Stycznych":
+                        //TODO: whole class and logic
+                        break;
+                }
+            }
+            else
+            {
+                
             }
 
         }
@@ -106,20 +132,69 @@ namespace NumProjApp
         {
             Dictionary<int, double> coefKeys = new Dictionary<int, double>();
             if (grade >= 1)
-                coefKeys.Add(1, Double.Parse(tbcoef1.Text));
+            {
+                if (String.IsNullOrWhiteSpace(tbcoef1.Text)) throw new ArgumentNullException();
+                else coefKeys.Add(1, Double.Parse(tbcoef1.Text));
+            }
             if (grade >= 2)
-                coefKeys.Add(2, Double.Parse(tbcoef2.Text));
+            {
+                if (String.IsNullOrWhiteSpace(tbcoef2.Text)) throw new ArgumentNullException();
+                else coefKeys.Add(2, Double.Parse(tbcoef2.Text));
+            }
             if (grade >= 3)
-                coefKeys.Add(3, Double.Parse(tbcoef3.Text));
+            {
+                if (String.IsNullOrWhiteSpace(tbcoef3.Text)) throw new ArgumentNullException();
+                else coefKeys.Add(3, Double.Parse(tbcoef3.Text));
+            }
             if (grade >= 4)
-                coefKeys.Add(4, Double.Parse(tbcoef4.Text));
+            {
+                if (String.IsNullOrWhiteSpace(tbcoef4.Text)) throw new ArgumentNullException();
+                else coefKeys.Add(4, Double.Parse(tbcoef4.Text));
+            }
             if (grade >= 5)
-                coefKeys.Add(5, Double.Parse(tbcoef5.Text));
+            {
+                if (String.IsNullOrWhiteSpace(tbcoef5.Text)) throw new ArgumentNullException();
+                else coefKeys.Add(5, Double.Parse(tbcoef5.Text));
+            }
             if (grade >= 6)
-                coefKeys.Add(6, Double.Parse(tbcoef6.Text));
+            {
+                if (String.IsNullOrWhiteSpace(tbcoef6.Text)) throw new ArgumentNullException();
+                else coefKeys.Add(6, Double.Parse(tbcoef6.Text));
+            }
             if (grade == 7)
-                coefKeys.Add(7, Double.Parse(tbcoef7.Text));
+            {
+                if (String.IsNullOrWhiteSpace(tbcoef7.Text)) throw new ArgumentNullException();
+                else coefKeys.Add(7, Double.Parse(tbcoef7.Text));
+            }
             return coefKeys;
+        }
+        private KeyValuePair<double, double> ReadRange()
+        {
+            double range1 = Double.Parse(tbRange1.Text);
+            double range2 = Double.Parse(tbRange2.Text);
+            KeyValuePair<double, double> ranges;
+            if (range1 < range2)
+            {
+                ranges = new KeyValuePair<double, double>(range1, range2);
+            }
+            else
+            {
+                ranges = new KeyValuePair<double, double>(range2, range1);
+            }
+            return ranges;
+        }
+        #endregion
+        #region ValidationMethods
+        private bool Validate()
+        {
+            bool isValid = true;
+            if (String.IsNullOrWhiteSpace(tbRange1.Text) || String.IsNullOrWhiteSpace(tbRange2.Text))
+                isValid = false;
+            if (cbCorrection.SelectedItem == null)
+                isValid = false;
+            if (cbGrade.SelectedItem == null || (int)cbGrade.SelectedItem == 0)
+                isValid = false;
+            return isValid;
         }
         #endregion
     }
