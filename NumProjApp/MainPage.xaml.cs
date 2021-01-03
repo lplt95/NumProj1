@@ -53,38 +53,36 @@ namespace NumProjApp
         }
         private void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Validate())
+            if (Validate())//metoda służąca do sprawdzenia, czy pola nie są puste
             {
-                Dictionary<int, double> coefs;
-                double range1, range2;
+                Dictionary<int, double> coefs;//tutaj zdefiniowane będą współczynniki, posortowane według stopnia
+                KeyValuePair<double, double> range;
                 try
                 {
-                    coefs = ReadCoef(grade);
-                    var range = ReadRange();
-                    range1 = range.Key;
-                    range2 = range.Value;
+                    coefs = ReadCoef(grade);//odczyt współczynników
+                    range = ReadRange();//odczyt zakresu działań
                 }
-                catch (ArgumentNullException nullExc)
+                catch (ArgumentNullException nullExc)//obsłużenie błędu z pustymi polami
                 {
-
+                    //TODO: wiadomość dla użytkownika
                     return;
                 }
-                catch (FormatException formatExc)
+                catch (FormatException formatExc)//obsłużenie błędu z niepoprawnymi danymi w polach
                 {
-
+                    //TODO: wiadomość dla użytkownika
                     return;
                 }
 
                 double solution = Double.NaN;
-                int loopCount = 0;
+                int loopCount = 0;//ta zmienna posłuży do kontrolowania ilości przebiegów pętli
                 switch ((string)cbType.SelectedItem)
                 {
                     case "Metoda Bisekcji":
-                        Bisekcja biMethod = new Bisekcja(grade, 0, coefs);
+                        Bisekcja biMethod = new Bisekcja(grade, 0, coefs, range);
                         //TODO: calc on bisekcja
                         break;
                     case "Metoda Siecznych":
-                        Sieczne sieczneMethod = new Sieczne(grade, 0, coefs);
+                        Sieczne sieczneMethod = new Sieczne(grade, 0, coefs, range);
                         solution = sieczneMethod.CalculateSolution(ref loopCount);
                         break;
                     case "Metoda Stycznych":
@@ -94,12 +92,12 @@ namespace NumProjApp
             }
             else
             {
-                
+                //TODO: wiadomość dla użytkownika
             }
 
         }
         #region GridsPrivateMethods
-        private void GridVisibility(int grade)
+        private void GridVisibility(int grade)//ta metoda służy do ustawienia widoczności pól pozwalających wprowadzać dane o współczynnikach
         {
             HideAllGrids();
             if (grade >= 1)
@@ -118,7 +116,7 @@ namespace NumProjApp
                 GridG.Visibility = Visibility.Visible;
 
         }
-        private void HideAllGrids()
+        private void HideAllGrids()//ta metoda resetuje widoczność wszystkich pól do współczynników
         {
             GridA.Visibility = Visibility.Collapsed;
             GridB.Visibility = Visibility.Collapsed;
@@ -128,7 +126,7 @@ namespace NumProjApp
             GridF.Visibility = Visibility.Collapsed;
             GridG.Visibility = Visibility.Collapsed;
         }
-        private Dictionary<int, double> ReadCoef(int grade)
+        private Dictionary<int, double> ReadCoef(int grade)//ta metoda służy do bezpośredniego zczytywania współczynników, w zależności od stopnia równania
         {
             Dictionary<int, double> coefKeys = new Dictionary<int, double>();
             if (grade >= 1)
@@ -168,7 +166,7 @@ namespace NumProjApp
             }
             return coefKeys;
         }
-        private KeyValuePair<double, double> ReadRange()
+        private KeyValuePair<double, double> ReadRange()//ta metoda służy do odczytania zakresu obliczeń
         {
             double range1 = Double.Parse(tbRange1.Text);
             double range2 = Double.Parse(tbRange2.Text);
@@ -185,7 +183,7 @@ namespace NumProjApp
         }
         #endregion
         #region ValidationMethods
-        private bool Validate()
+        private bool Validate()//metoda walidacyjna - sprawdza czy poszczególne pola mają wprowadzone wartości, warunek konieczny do rozpoczęcia dalszych działań
         {
             bool isValid = true;
             if (String.IsNullOrWhiteSpace(tbRange1.Text) || String.IsNullOrWhiteSpace(tbRange2.Text))
