@@ -79,7 +79,7 @@ namespace NumProjApp
                 {
                     case "Metoda Bisekcji":
                         Bisekcja biMethod = new Bisekcja(grade, 0, coefs, range);
-                        //TODO: calc on bisekcja
+                        solution = biMethod.CalculateSolution(ref loopCount);
                         break;
                     case "Metoda Siecznych":
                         Sieczne sieczneMethod = new Sieczne(grade, 0, coefs, range);
@@ -88,6 +88,10 @@ namespace NumProjApp
                     case "Metoda Stycznych":
                         //TODO: whole class and logic
                         break;
+                }
+                if(solution == Double.MaxValue)
+                {
+                    //TODO: wartości funkcji na końcach przedziału nie mają róznych znaków, brak miejsc zerowych w przedziale
                 }
             }
             else

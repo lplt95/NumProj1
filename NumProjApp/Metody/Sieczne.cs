@@ -29,7 +29,6 @@ namespace NumProjApp.Metody
         {
             double res = 0;
             return res;
-            
         }
     }
 }
