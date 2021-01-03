@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="NumProjApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NumProjApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Name="MainGrid">
+        <StackPanel Margin="100, 100, 0, 0">
+            <ComboBox x:Name="cbType" Width="160"/>
+        </StackPanel>
+        <TextBlock x:Name="tbMethods" Text="Wybierz metodę rozwiązania:" FontSize="16" Margin="100, 60, 0, 0" TextWrapping="Wrap"/>
+        <TextBlock x:Name="tbGrade" Text="Wybierz stopień równania:" FontSize="16" Margin="500, 60, 0, 0" TextWrapping="Wrap"/>
+        <TextBlock x:Name="tbCorrection" Text="Podaj dokładność rozwiązania:" FontSize="16" Margin="500, 160, 0, 0" TextWrapping="Wrap"/>
+        <ComboBox x:Name="cbGrade" Width="120" Margin="500, 100, 0, 0" SelectedIndex="0" SelectionChanged="cbGrade_SelectionChanged"/>
+        <ComboBox x:Name="cbCorrection" Width="120" Margin="500, 200, 0, 0" SelectedIndex="0"/>
+        <Grid Name="GridsGrid" Margin="100, 260, 0, 0">
+            <Grid Name="GridA" Margin="0, 0, 840, 280">
+                <TextBlock x:Name="coef1" HorizontalAlignment="Left" Margin="28,0,0,0" Text="A" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbcoef1" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Name="GridB" Margin="80, 0, 760, 280">
+                <TextBlock x:Name="coef2" HorizontalAlignment="Left" Margin="28,0,0,0" Text="B" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbcoef2" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Name="GridC" Margin="160, 0, 680, 280">
+                <TextBlock x:Name="coef3" HorizontalAlignment="Left" Margin="28,0,0,0" Text="C" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbcoef3" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Name="GridD" Margin="240, 0, 600, 280">
+                <TextBlock x:Name="coef4" HorizontalAlignment="Left" Margin="28,0,0,0" Text="D" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbcoef4" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Name="GridE" Margin="320, 0, 520, 280">
+                <TextBlock x:Name="coef5" HorizontalAlignment="Left" Margin="28,0,0,0" Text="E" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbcoef5" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Name="GridF" Margin="400, 0, 440, 280">
+                <TextBlock x:Name="coef6" HorizontalAlignment="Left" Margin="28,0,0,0" Text="F" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbcoef6" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Name="GridG" Margin="480, 0, 360, 280">
+                <TextBlock x:Name="coef7" HorizontalAlignment="Left" Margin="28,0,0,0" Text="G" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <TextBox x:Name="tbcoef7" HorizontalAlignment="Left" Margin="0,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            </Grid>
+            <Button Name="GenerateButton" HorizontalAlignment="Left" Margin="240, -150, 0, 0" Content="Oblicz!" Click="GenerateButton_Click"/>
+        </Grid>
+
+    </Grid>
+</Page>
