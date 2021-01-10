@@ -203,5 +203,15 @@ namespace NumProjApp
             return isValid;
         }
         #endregion
+
+        private void cbCorrection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

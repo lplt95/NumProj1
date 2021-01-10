@@ -9,15 +9,20 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Name="MainGrid">
-        <StackPanel Margin="100, 100, 0, 0">
-            <ComboBox x:Name="cbType" Width="160" SelectedIndex="0"/>
+        <StackPanel Margin="100, 60, 700, 480">
+            <StackPanel.Resources>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Margin" Value="0, 20, 0, 0"/>
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock x:Name="tbMethods" FontSize="16" TextWrapping="Wrap" Text="Wybierz metodę rozwiązania:"/>
+            <ComboBox x:Name="cbType" Width="160" SelectedIndex="0" />
         </StackPanel>
-        <TextBlock x:Name="tbMethods" Text="Wybierz metodę rozwiązania:" FontSize="16" Margin="100, 60, 0, 0" TextWrapping="Wrap"/>
-        <TextBlock x:Name="tbGrade" Text="Wybierz stopień równania:" FontSize="16" Margin="500, 60, 0, 0" TextWrapping="Wrap"/>
-        <TextBlock x:Name="tbCorrection" Text="Podaj dokładność rozwiązania:" FontSize="16" Margin="500, 160, 0, 0" TextWrapping="Wrap"/>
+        <TextBlock x:Name="tbGrade" Text="Wybierz stopień równania:" FontSize="16" Margin="500, 60, 0, 550" TextWrapping="Wrap"/>
+        <TextBlock x:Name="tbCorrection" Text="Podaj dokładność rozwiązania:" FontSize="16" Margin="500, 160, 0, 450" TextWrapping="Wrap"/>
         <ComboBox x:Name="cbGrade" Width="120" Margin="500, 100, 0, 0" SelectedIndex="0" SelectionChanged="cbGrade_SelectionChanged"/>
         <ComboBox x:Name="cbCorrection" Width="120" Margin="500, 200, 0, 0" SelectedIndex="0"/>
-        <TextBlock x:Name="tbRange" Text="Podaj zakres obliczeń:" FontSize="16" Margin="100, 160, 0, 0"/>
+        <TextBlock x:Name="tbRange" Text="Podaj zakres obliczeń:" FontSize="16" Margin="100, 160, 550, 450"/>
         <StackPanel Margin="100, 200, 700, 400" Orientation="Horizontal">
             <StackPanel.Resources>
                 <Style TargetType="TextBox">
