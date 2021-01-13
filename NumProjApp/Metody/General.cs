@@ -8,14 +8,25 @@ namespace NumProjApp.Metody
     {
         protected double correction;
         protected int grade;
-        protected Dictionary<int, double> wsp;
         protected KeyValuePair<double, double> range;
-        public General(int _grade, double _correction, Dictionary<int, double> _wsp, KeyValuePair<double, double> _range)
+        protected List<Rownanie> coefsList;
+        public General(int _grade, double _correction, KeyValuePair<double, double> _range, List<Rownanie> _coefsList)
         {
             correction = _correction;
             grade = _grade;
-            wsp = _wsp;
+            coefsList = _coefsList;
             range = _range;
+        }
+        protected double CalcFunction(double x)
+        {
+            double res = 0;
+            /*foreach (var key in wsp)
+            {
+                int grade = key.grade;
+                double xsqrt = Math.Pow(x, grade);
+                res += xsqrt * key.coef;
+            }*/
+            return res;
         }
     }
 }

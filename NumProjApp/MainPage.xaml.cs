@@ -55,7 +55,7 @@ namespace NumProjApp
         {
             if (Validate())//metoda służąca do sprawdzenia, czy pola nie są puste
             {
-                Dictionary<int, double> coefs;//tutaj zdefiniowane będą współczynniki, posortowane według stopnia
+                List<Rownanie> coefs = new List<Rownanie>();
                 KeyValuePair<double, double> range;
                 try
                 {
@@ -78,11 +78,11 @@ namespace NumProjApp
                 switch ((string)cbType.SelectedItem)
                 {
                     case "Metoda Bisekcji":
-                        Bisekcja biMethod = new Bisekcja(grade, 0, coefs, range);
+                        Bisekcja biMethod = new Bisekcja(grade, 0, range, coefs);
                         solution = biMethod.CalculateSolution(ref loopCount);
                         break;
                     case "Metoda Siecznych":
-                        Sieczne sieczneMethod = new Sieczne(grade, 0, coefs, range);
+                        Sieczne sieczneMethod = new Sieczne(grade, 0, range, coefs);
                         solution = sieczneMethod.CalculateSolution(ref loopCount);
                         break;
                     case "Metoda Stycznych":
@@ -108,71 +108,76 @@ namespace NumProjApp
         {
             HideAllGrids();
             if (grade >= 1)
-                GridA.Visibility = Visibility.Visible;
+                spx1.Visibility = Visibility.Visible;
             if (grade >= 2)
-                GridB.Visibility = Visibility.Visible;
+                spx2.Visibility = Visibility.Visible;
             if (grade >= 3)
-                GridC.Visibility = Visibility.Visible;
+                spx3.Visibility = Visibility.Visible;
             if (grade >= 4)
-                GridD.Visibility = Visibility.Visible;
+                spx4.Visibility = Visibility.Visible;
             if (grade >= 5)
-                GridE.Visibility = Visibility.Visible;
+                spx5.Visibility = Visibility.Visible;
             if (grade >= 6)
-                GridF.Visibility = Visibility.Visible;
+                spx6.Visibility = Visibility.Visible;
             if (grade == 7)
-                GridG.Visibility = Visibility.Visible;
+                spx7.Visibility = Visibility.Visible;
 
         }
         private void HideAllGrids()//ta metoda resetuje widoczność wszystkich pól do współczynników
         {
-            GridA.Visibility = Visibility.Collapsed;
-            GridB.Visibility = Visibility.Collapsed;
-            GridC.Visibility = Visibility.Collapsed;
-            GridD.Visibility = Visibility.Collapsed;
-            GridE.Visibility = Visibility.Collapsed;
-            GridF.Visibility = Visibility.Collapsed;
-            GridG.Visibility = Visibility.Collapsed;
+            spx1.Visibility = Visibility.Collapsed;
+            spx2.Visibility = Visibility.Collapsed;
+            spx3.Visibility = Visibility.Collapsed;
+            spx4.Visibility = Visibility.Collapsed;
+            spx5.Visibility = Visibility.Collapsed;
+            spx6.Visibility = Visibility.Collapsed;
+            spx7.Visibility = Visibility.Collapsed;
             SolutionGrid.Visibility = Visibility.Collapsed;
         }
-        private Dictionary<int, double> ReadCoef(int grade)//ta metoda służy do bezpośredniego zczytywania współczynników, w zależności od stopnia równania
+        private List<Rownanie> ReadCoef(int grade)//ta metoda służy do bezpośredniego zczytywania współczynników, w zależności od stopnia równania
         {
-            Dictionary<int, double> coefKeys = new Dictionary<int, double>();
+            List<Rownanie> coefList = new List<Rownanie>();
             if (grade >= 1)
             {
-                if (String.IsNullOrWhiteSpace(tbcoef1.Text)) throw new ArgumentNullException();
-                else coefKeys.Add(1, Double.Parse(tbcoef1.Text));
+                if (String.IsNullOrWhiteSpace(tbx1.Text)) throw new ArgumentNullException();
+                else if (String.IsNullOrWhiteSpace(tbx0.Text)) throw new ArgumentNullException();
+                else
+                {
+                    coefList.Add(new Rownanie(0, Double.Parse(tbx0.Text)));
+                    coefList.Add(new Rownanie(1, Double.Parse(tbx1.Text)));
+                }
             }
             if (grade >= 2)
             {
-                if (String.IsNullOrWhiteSpace(tbcoef2.Text)) throw new ArgumentNullException();
-                else coefKeys.Add(2, Double.Parse(tbcoef2.Text));
+                if (String.IsNullOrWhiteSpace(tbx2.Text)) throw new ArgumentNullException();
+                else coefList.Add(new Rownanie(2, Double.Parse(tbx2.Text)));
             }
             if (grade >= 3)
             {
-                if (String.IsNullOrWhiteSpace(tbcoef3.Text)) throw new ArgumentNullException();
-                else coefKeys.Add(3, Double.Parse(tbcoef3.Text));
+                if (String.IsNullOrWhiteSpace(tbx3.Text)) throw new ArgumentNullException();
+                else coefList.Add(new Rownanie(3, Double.Parse(tbx3.Text)));
             }
             if (grade >= 4)
             {
-                if (String.IsNullOrWhiteSpace(tbcoef4.Text)) throw new ArgumentNullException();
-                else coefKeys.Add(4, Double.Parse(tbcoef4.Text));
+                if (String.IsNullOrWhiteSpace(tbx4.Text)) throw new ArgumentNullException();
+                else coefList.Add(new Rownanie(4, Double.Parse(tbx4.Text)));
             }
             if (grade >= 5)
             {
-                if (String.IsNullOrWhiteSpace(tbcoef5.Text)) throw new ArgumentNullException();
-                else coefKeys.Add(5, Double.Parse(tbcoef5.Text));
+                if (String.IsNullOrWhiteSpace(tbx5.Text)) throw new ArgumentNullException();
+                else coefList.Add(new Rownanie(5, Double.Parse(tbx5.Text)));
             }
             if (grade >= 6)
             {
-                if (String.IsNullOrWhiteSpace(tbcoef6.Text)) throw new ArgumentNullException();
-                else coefKeys.Add(6, Double.Parse(tbcoef6.Text));
+                if (String.IsNullOrWhiteSpace(tbx6.Text)) throw new ArgumentNullException();
+                else coefList.Add(new Rownanie(6, Double.Parse(tbx6.Text)));
             }
             if (grade == 7)
             {
-                if (String.IsNullOrWhiteSpace(tbcoef7.Text)) throw new ArgumentNullException();
-                else coefKeys.Add(7, Double.Parse(tbcoef7.Text));
+                if (String.IsNullOrWhiteSpace(tbx7.Text)) throw new ArgumentNullException();
+                else coefList.Add(new Rownanie(7, Double.Parse(tbx7.Text)));
             }
-            return coefKeys;
+            return coefList;
         }
         private KeyValuePair<double, double> ReadRange()//ta metoda służy do odczytania zakresu obliczeń
         {

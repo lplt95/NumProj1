@@ -37,51 +37,66 @@
             <TextBlock Text=":"/>
             <TextBox x:Name="tbRange2"/>
         </StackPanel>
-        <Grid Name="GridsGrid" Margin="100, 260, 0, 0">
-            <Grid.Resources>
+        <TextBlock Text="Podaj parametry równania:" Margin="100, 260, 0, 0" FontSize="16"/>
+        <StackPanel Name="spCoefs" Margin="100, 300, 0, 300" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Orientation" Value="Horizontal"/>
+                </Style>
                 <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="28,0,0,0"/>
+                    <Setter Property="Margin" Value="10,5,5,0"/>
                     <Setter Property="TextWrapping" Value="Wrap"/>
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
                 </Style>
                 <Style TargetType="TextBox">
-                    <Setter Property="Margin" Value="0,35,0,0"/>
+                    <Setter Property="Margin" Value="0,0,0,0"/>
                     <Setter Property="TextWrapping" Value="Wrap"/>
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Width" Value="40"/>
                 </Style>
-            </Grid.Resources>
-            <Grid Name="GridA" Margin="0, 0, 840, 280">
-                <TextBlock x:Name="coef1" Text="A"/>
-                <TextBox x:Name="tbcoef1"/>
-            </Grid>
-            <Grid Name="GridB" Margin="80, 0, 760, 280">
-                <TextBlock x:Name="coef2" Text="B"/>
-                <TextBox x:Name="tbcoef2"/>
-            </Grid>
-            <Grid Name="GridC" Margin="160, 0, 680, 280">
-                <TextBlock x:Name="coef3" Text="C"/>
-                <TextBox x:Name="tbcoef3"/>
-            </Grid>
-            <Grid Name="GridD" Margin="240, 0, 600, 280">
-                <TextBlock x:Name="coef4" Text="D"/>
-                <TextBox x:Name="tbcoef4"/>
-            </Grid>
-            <Grid Name="GridE" Margin="320, 0, 520, 280">
-                <TextBlock x:Name="coef5" Text="E"/>
-                <TextBox x:Name="tbcoef5"/>
-            </Grid>
-            <Grid Name="GridF" Margin="400, 0, 440, 280">
-                <TextBlock x:Name="coef6" Text="F"/>
-                <TextBox x:Name="tbcoef6"/>
-            </Grid>
-            <Grid Name="GridG" Margin="480, 0, 360, 280">
-                <TextBlock x:Name="coef7" Text="G"/>
-                <TextBox x:Name="tbcoef7"/>
-            </Grid>
+            </StackPanel.Resources>
+            <StackPanel Name="spx7">
+                <TextBox x:Name="tbx7"/>
+                <TextBlock Text="x^7"/>
+                <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
+            </StackPanel>
+            <StackPanel Name="spx6">
+                <TextBox x:Name="tbx6"/>
+                <TextBlock Text="x^6"/>
+                <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
+            </StackPanel>
+            <StackPanel Name="spx5">
+                <TextBox x:Name="tbx5"/>
+                <TextBlock Text="x^5"/>
+                <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
+            </StackPanel>
+            <StackPanel Name="spx4">
+                <TextBox x:Name="tbx4"/>
+                <TextBlock Text="x^4"/>
+                <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
+            </StackPanel>
+            <StackPanel Name="spx3">
+                <TextBox x:Name="tbx3"/>
+                <TextBlock Text="x^3"/>
+                <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
+            </StackPanel>
+            <StackPanel Name="spx2">
+                <TextBox x:Name="tbx2"/>
+                <TextBlock Text="x^2"/>
+                <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
+            </StackPanel>
+            <StackPanel Name="spx1">
+                <TextBox x:Name="tbx1"/>
+                <TextBlock Text="x"/>
+                <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
+            </StackPanel>
+            <StackPanel Name="spx0">
+                <TextBox x:Name="tbx0"/>
+            </StackPanel>
             <Button Name="GenerateButton" HorizontalAlignment="Left" Margin="240, -150, 0, 0" Content="Oblicz!" Click="GenerateButton_Click"/>
-        </Grid>
+        </StackPanel>
         <Grid Name="SolutionGrid" Margin="100, 410, 0, 150" Visibility="Collapsed">
             <Grid.Resources>
                 <Style TargetType="TextBlock">

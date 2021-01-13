@@ -6,13 +6,14 @@ namespace NumProjApp.Metody
 {
     class Bisekcja : General
     {
-        public Bisekcja(int _grade, double _correction, Dictionary<int, double> _wsp, KeyValuePair<double, double> _range) : base(_grade, _correction, _wsp, _range)
+        public Bisekcja(int _grade, double _correction, KeyValuePair<double, double> _range, List<Rownanie> _coefsList) : base(_grade, _correction, _range, _coefsList)
         {
 
         }
         public double CalculateSolution(ref int loopCount)
         {
             double solution = Double.MinValue;//inicjacja zmiennej przechowującej ostateczne rozwiązanie
+            loopCount = 0;//wyzerowanie zmiennej liczącej obroty pętli
             bool correctionGained = false;//zmienna kontrolująca czy osiągnięto zadaną dokładność
             double rangeCalcA = CalcFunction(range.Key);//wstępna kalkulacja wartości funkcji dla początku zakresu
             double rangeCalcB = CalcFunction(range.Value);//wstępna kalkulacja wartości funkcji dla końca zakresu
@@ -25,29 +26,18 @@ namespace NumProjApp.Metody
                 double rangeC = (rangeA + rangeB) / 2;//średnia arytmetyczna z końców przedziału, punkt C
                 double rangeCalcC = CalcFunction(rangeC);//wyliczenie wartości funkcji w punkcie C
                 if (Math.Abs(rangeCalcC) < correction) correctionGained = true;//sprawdzenie czy osiągnięto zadaną dokładność
-                if (rangeCalcA * rangeCalcC < 0)
+                if (rangeCalcA * rangeCalcC < 0)//sprawdzenie czy wartości funkcji mają przeciwne znaki
                 {
-                    rangeCalcB = rangeCalcC;
+                    rangeCalcB = rangeCalcC;//jeśli tak, przypisz wartość C do B
                     rangeB = rangeC;
                 }
                 else
                 {
-                    rangeCalcA = rangeCalcC;
+                    rangeCalcA = rangeCalcC;//jeśli nie, przypisz wartość C do A
                     rangeA = rangeC;
                 }
             }
             return solution;
-        }
-        private double CalcFunction(double x)
-        {
-            double res = 0;
-            foreach(var key in wsp)
-            {
-                int grade = key.Key;
-                double xsqrt = Math.Pow(x, grade);
-                res += xsqrt * key.Value;
-            }
-            return res;
         }
     }
 }
