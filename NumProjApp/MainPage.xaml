@@ -9,7 +9,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Name="MainGrid">
-        <StackPanel Margin="100, 60, 700, 480">
+        <Grid.Resources>
+            <Style TargetType="StackPanel">
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+            </Style>
+        </Grid.Resources>
+        <StackPanel Margin="100, 60, 0, 0">
             <StackPanel.Resources>
                 <Style TargetType="ComboBox">
                     <Setter Property="Margin" Value="0, 20, 0, 0"/>
@@ -23,7 +29,7 @@
         <ComboBox x:Name="cbGrade" Width="120" Margin="500, 100, 0, 0" SelectedIndex="0" SelectionChanged="cbGrade_SelectionChanged"/>
         <ComboBox x:Name="cbCorrection" Width="120" Margin="500, 200, 0, 0" SelectedIndex="0"/>
         <TextBlock x:Name="tbRange" Text="Podaj zakres obliczeń:" FontSize="16" Margin="100, 160, 550, 450"/>
-        <StackPanel Margin="100, 200, 700, 400" Orientation="Horizontal">
+        <StackPanel Margin="100, 200, 0, 0" Orientation="Horizontal">
             <StackPanel.Resources>
                 <Style TargetType="TextBox">
                     <Setter Property="Margin" Value="0,0,15,0"/>
@@ -37,7 +43,7 @@
             <TextBlock Text=":"/>
             <TextBox x:Name="tbRange2"/>
         </StackPanel>
-        <TextBlock Text="Podaj parametry równania:" Margin="100, 260, 0, 0" FontSize="16"/>
+        <TextBlock Text="Podaj parametry równania:" Margin="100, 260, 700, 350" FontSize="16"/>
         <StackPanel Name="spCoefs" Margin="100, 300, 0, 300" Orientation="Horizontal">
             <StackPanel.Resources>
                 <Style TargetType="StackPanel">
@@ -50,53 +56,54 @@
                     <Setter Property="VerticalAlignment" Value="Top"/>
                 </Style>
                 <Style TargetType="TextBox">
-                    <Setter Property="Margin" Value="0,0,0,0"/>
                     <Setter Property="TextWrapping" Value="Wrap"/>
                     <Setter Property="HorizontalAlignment" Value="Left"/>
                     <Setter Property="VerticalAlignment" Value="Top"/>
                     <Setter Property="Width" Value="40"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Background" Value="LimeGreen"/>
                 </Style>
             </StackPanel.Resources>
             <StackPanel Name="spx7">
-                <TextBox x:Name="tbx7"/>
+                <TextBox x:Name="tbx7" BeforeTextChanging="BeforeTextChanging"/>
                 <TextBlock Text="x^7"/>
                 <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
             </StackPanel>
             <StackPanel Name="spx6">
-                <TextBox x:Name="tbx6"/>
+                <TextBox x:Name="tbx6" BeforeTextChanging="BeforeTextChanging"/>
                 <TextBlock Text="x^6"/>
                 <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
             </StackPanel>
             <StackPanel Name="spx5">
-                <TextBox x:Name="tbx5"/>
+                <TextBox x:Name="tbx5" BeforeTextChanging="BeforeTextChanging"/>
                 <TextBlock Text="x^5"/>
                 <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
             </StackPanel>
             <StackPanel Name="spx4">
-                <TextBox x:Name="tbx4"/>
+                <TextBox x:Name="tbx4" BeforeTextChanging="BeforeTextChanging"/>
                 <TextBlock Text="x^4"/>
                 <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
             </StackPanel>
             <StackPanel Name="spx3">
-                <TextBox x:Name="tbx3"/>
+                <TextBox x:Name="tbx3" BeforeTextChanging="BeforeTextChanging"/>
                 <TextBlock Text="x^3"/>
                 <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
             </StackPanel>
             <StackPanel Name="spx2">
-                <TextBox x:Name="tbx2"/>
+                <TextBox x:Name="tbx2" BeforeTextChanging="BeforeTextChanging"/>
                 <TextBlock Text="x^2"/>
                 <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
             </StackPanel>
             <StackPanel Name="spx1">
-                <TextBox x:Name="tbx1"/>
+                <TextBox x:Name="tbx1" BeforeTextChanging="BeforeTextChanging"/>
                 <TextBlock Text="x"/>
                 <TextBlock Text="+" FontSize="25" Margin="0,0,10,0"/>
             </StackPanel>
             <StackPanel Name="spx0">
-                <TextBox x:Name="tbx0"/>
+                <TextBox x:Name="tbx0" BeforeTextChanging="BeforeTextChanging"/>
             </StackPanel>
-            <Button Name="GenerateButton" HorizontalAlignment="Left" Margin="240, -150, 0, 0" Content="Oblicz!" Click="GenerateButton_Click"/>
         </StackPanel>
+        <Button Name="GenerateButton" HorizontalAlignment="Left" Margin="340,150, 0, 0" Content="Oblicz!" Click="GenerateButton_Click"/>
         <Grid Name="SolutionGrid" Margin="100, 410, 0, 150" Visibility="Collapsed">
             <Grid.Resources>
                 <Style TargetType="TextBlock">

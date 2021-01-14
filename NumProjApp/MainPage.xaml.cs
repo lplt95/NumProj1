@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Popups;
+using Windows.System;
 using NumProjApp.Metody;
 
 //Szablon elementu Pusta strona jest udokumentowany na stronie https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x415
@@ -51,7 +53,7 @@ namespace NumProjApp
             grade = (int)cbGrade.SelectedItem;
             GridVisibility(grade);
         }
-        private void GenerateButton_Click(object sender, RoutedEventArgs e)
+        private async void GenerateButton_Click(object sender, RoutedEventArgs e)
         {
             if (Validate())//metoda służąca do sprawdzenia, czy pola nie są puste
             {
@@ -64,12 +66,14 @@ namespace NumProjApp
                 }
                 catch (ArgumentNullException nullExc)//obsłużenie błędu z pustymi polami
                 {
-                    //TODO: wiadomość dla użytkownika
+                    string error = "Wygląda na to, że wystąpił błąd:\n";
+                    await new MessageDialog(error + nullExc.Message).ShowAsync();
                     return;
                 }
                 catch (FormatException formatExc)//obsłużenie błędu z niepoprawnymi danymi w polach
                 {
-                    //TODO: wiadomość dla użytkownika
+                    string error = "Wygląda na to, że wystąpił błąd:\n";
+                    await new MessageDialog(error + formatExc.Message).ShowAsync();
                     return;
                 }
 
@@ -86,12 +90,15 @@ namespace NumProjApp
                         solution = sieczneMethod.CalculateSolution(ref loopCount);
                         break;
                     case "Metoda Stycznych":
-                        //TODO: whole class and logic
+                        Styczne styczneMethod = new Styczne(grade, 0, range, coefs);
+                        solution = styczneMethod.CalculateSolution(ref loopCount);
                         break;
                 }
                 if(solution == Double.MaxValue)
                 {
-                    //TODO: wartości funkcji na końcach przedziału nie mają róznych znaków, brak miejsc zerowych w przedziale
+                    string message = "Podany przedział nie zawiera miejsc zerowych";
+                    await new MessageDialog(message).ShowAsync();
+                    return;
                 }
                 tbItCount.Text = loopCount.ToString();
                 tbSolution.Text = solution.ToString();
@@ -99,7 +106,8 @@ namespace NumProjApp
             }
             else
             {
-                //TODO: wiadomość dla użytkownika
+                string message = "Wygląda na to, że niektóre pola są niewypełnione.\nPopraw dane i spróbuj jeszcze raz.";
+                await new MessageDialog(message).ShowAsync();
             }
 
         }
@@ -107,8 +115,12 @@ namespace NumProjApp
         private void GridVisibility(int grade)//ta metoda służy do ustawienia widoczności pól pozwalających wprowadzać dane o współczynnikach
         {
             HideAllGrids();
+
             if (grade >= 1)
+            {
+                spx0.Visibility = Visibility.Visible;
                 spx1.Visibility = Visibility.Visible;
+            }
             if (grade >= 2)
                 spx2.Visibility = Visibility.Visible;
             if (grade >= 3)
@@ -125,6 +137,7 @@ namespace NumProjApp
         }
         private void HideAllGrids()//ta metoda resetuje widoczność wszystkich pól do współczynników
         {
+            spx0.Visibility = Visibility.Collapsed;
             spx1.Visibility = Visibility.Collapsed;
             spx2.Visibility = Visibility.Collapsed;
             spx3.Visibility = Visibility.Collapsed;
@@ -207,16 +220,15 @@ namespace NumProjApp
                 isValid = false;
             return isValid;
         }
+        private async void BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
+            if(args.Cancel)
+            {
+                string error = "Musisz wprowadzić liczbę";
+                await new MessageDialog(error).ShowAsync();
+            }
+        }
         #endregion
-
-        private void cbCorrection_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }
