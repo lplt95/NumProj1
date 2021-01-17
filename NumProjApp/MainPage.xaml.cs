@@ -57,7 +57,7 @@ namespace NumProjApp
         {
             if (Validate())//metoda służąca do sprawdzenia, czy pola nie są puste
             {
-                List<Rownanie> coefs = new List<Rownanie>();
+                List<Monomial> coefs = new List<Monomial>();
                 KeyValuePair<double, double> range;
                 try
                 {
@@ -76,21 +76,21 @@ namespace NumProjApp
                     await new MessageDialog(error + formatExc.Message).ShowAsync();
                     return;
                 }
-
+                Rownanie row = new Rownanie(grade, coefs);
                 double solution = Double.NaN;
                 int loopCount = 0;//ta zmienna posłuży do kontrolowania ilości przebiegów pętli
                 switch ((string)cbType.SelectedItem)
                 {
                     case "Metoda Bisekcji":
-                        Bisekcja biMethod = new Bisekcja(grade, 0, range, coefs);
+                        Bisekcja biMethod = new Bisekcja(grade, 0, range, row);
                         solution = biMethod.CalculateSolution(ref loopCount);
                         break;
                     case "Metoda Siecznych":
-                        Sieczne sieczneMethod = new Sieczne(grade, 0, range, coefs);
+                        Sieczne sieczneMethod = new Sieczne(grade, 0, range, row);
                         solution = sieczneMethod.CalculateSolution(ref loopCount);
                         break;
                     case "Metoda Stycznych":
-                        Styczne styczneMethod = new Styczne(grade, 0, range, coefs);
+                        Styczne styczneMethod = new Styczne(grade, 0, range, row);
                         solution = styczneMethod.CalculateSolution(ref loopCount);
                         break;
                 }
@@ -109,7 +109,6 @@ namespace NumProjApp
                 string message = "Wygląda na to, że niektóre pola są niewypełnione.\nPopraw dane i spróbuj jeszcze raz.";
                 await new MessageDialog(message).ShowAsync();
             }
-
         }
         #region GridsPrivateMethods
         private void GridVisibility(int grade)//ta metoda służy do ustawienia widoczności pól pozwalających wprowadzać dane o współczynnikach
@@ -147,48 +146,48 @@ namespace NumProjApp
             spx7.Visibility = Visibility.Collapsed;
             SolutionGrid.Visibility = Visibility.Collapsed;
         }
-        private List<Rownanie> ReadCoef(int grade)//ta metoda służy do bezpośredniego zczytywania współczynników, w zależności od stopnia równania
+        private List<Monomial> ReadCoef(int grade)//ta metoda służy do bezpośredniego zczytywania współczynników, w zależności od stopnia równania
         {
-            List<Rownanie> coefList = new List<Rownanie>();
+            List<Monomial> coefList = new List<Monomial>();
             if (grade >= 1)
             {
                 if (String.IsNullOrWhiteSpace(tbx1.Text)) throw new ArgumentNullException();
                 else if (String.IsNullOrWhiteSpace(tbx0.Text)) throw new ArgumentNullException();
                 else
                 {
-                    coefList.Add(new Rownanie(0, Double.Parse(tbx0.Text)));
-                    coefList.Add(new Rownanie(1, Double.Parse(tbx1.Text)));
+                    coefList.Add(new Monomial(0, Double.Parse(tbx0.Text)));
+                    coefList.Add(new Monomial(1, Double.Parse(tbx1.Text)));
                 }
             }
             if (grade >= 2)
             {
                 if (String.IsNullOrWhiteSpace(tbx2.Text)) throw new ArgumentNullException();
-                else coefList.Add(new Rownanie(2, Double.Parse(tbx2.Text)));
+                else coefList.Add(new Monomial(2, Double.Parse(tbx2.Text)));
             }
             if (grade >= 3)
             {
                 if (String.IsNullOrWhiteSpace(tbx3.Text)) throw new ArgumentNullException();
-                else coefList.Add(new Rownanie(3, Double.Parse(tbx3.Text)));
+                else coefList.Add(new Monomial(3, Double.Parse(tbx3.Text)));
             }
             if (grade >= 4)
             {
                 if (String.IsNullOrWhiteSpace(tbx4.Text)) throw new ArgumentNullException();
-                else coefList.Add(new Rownanie(4, Double.Parse(tbx4.Text)));
+                else coefList.Add(new Monomial(4, Double.Parse(tbx4.Text)));
             }
             if (grade >= 5)
             {
                 if (String.IsNullOrWhiteSpace(tbx5.Text)) throw new ArgumentNullException();
-                else coefList.Add(new Rownanie(5, Double.Parse(tbx5.Text)));
+                else coefList.Add(new Monomial(5, Double.Parse(tbx5.Text)));
             }
             if (grade >= 6)
             {
                 if (String.IsNullOrWhiteSpace(tbx6.Text)) throw new ArgumentNullException();
-                else coefList.Add(new Rownanie(6, Double.Parse(tbx6.Text)));
+                else coefList.Add(new Monomial(6, Double.Parse(tbx6.Text)));
             }
             if (grade == 7)
             {
                 if (String.IsNullOrWhiteSpace(tbx7.Text)) throw new ArgumentNullException();
-                else coefList.Add(new Rownanie(7, Double.Parse(tbx7.Text)));
+                else coefList.Add(new Monomial(7, Double.Parse(tbx7.Text)));
             }
             return coefList;
         }

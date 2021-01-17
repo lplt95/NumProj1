@@ -9,20 +9,32 @@ namespace NumProjApp.Metody
     public class Rownanie
     {
         public int grade { get; set; }
-        public double coef { get; set; }
-        public Rownanie(){}
-        public Rownanie(int _grade, double _coef)
+        public List<Monomial> monos { get; set; }
+        public Rownanie(int _grade, List<Monomial> _monos)
         {
             grade = _grade;
-            coef = _coef;
+            monos = _monos;
         }
-
         public Rownanie DifferentByX()
         {
             //pochodna z Ax^B = A*Bx^B-1
-            int newGrade = grade - 1;
-            double newCoef = coef * grade;
-            return new Rownanie(newGrade, newCoef);
+            List<Monomial> newMonos = new List<Monomial>();
+            foreach(var mono in monos)
+            {
+                if(mono.grade == 0)
+                {
+                    break;
+                }
+                int newGrade = mono.grade - 1;
+                if(newGrade == 0)
+                {
+                    newMonos.Add(new Monomial(0, mono.coef));
+                    break;
+                }
+                double newCoef = mono.coef * mono.grade;
+                newMonos.Add(new Monomial(newGrade, newCoef));
+            }
+            return new Rownanie(grade - 1, newMonos);
         }
     }
 }

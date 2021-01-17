@@ -6,7 +6,7 @@ namespace NumProjApp.Metody
 {
     class Bisekcja : General
     {
-        public Bisekcja(int _grade, double _correction, KeyValuePair<double, double> _range, List<Rownanie> _coefsList) : base(_grade, _correction, _range, _coefsList)
+        public Bisekcja(int _grade, double _correction, KeyValuePair<double, double> _range, Rownanie _row) : base(_grade, _correction, _range, _row)
         {
 
         }
@@ -15,8 +15,8 @@ namespace NumProjApp.Metody
             double solution = Double.MinValue;//inicjacja zmiennej przechowującej ostateczne rozwiązanie
             loopCount = 0;//wyzerowanie zmiennej liczącej obroty pętli
             bool correctionGained = false;//zmienna kontrolująca czy osiągnięto zadaną dokładność
-            double rangeCalcA = CalcFunction(range.Key);//wstępna kalkulacja wartości funkcji dla początku zakresu
-            double rangeCalcB = CalcFunction(range.Value);//wstępna kalkulacja wartości funkcji dla końca zakresu
+            double rangeCalcA = CalcFunction(range.Key, row);//wstępna kalkulacja wartości funkcji dla początku zakresu
+            double rangeCalcB = CalcFunction(range.Value, row);//wstępna kalkulacja wartości funkcji dla końca zakresu
             if (rangeCalcA * rangeCalcB > 0) return Double.MaxValue;
             double rangeA = range.Key;
             double rangeB = range.Value;
@@ -24,7 +24,7 @@ namespace NumProjApp.Metody
             {
                 loopCount++;//zwiększenie wartości zmiennej kontrolującej kolejne iteracje pętli
                 double rangeC = (rangeA + rangeB) / 2;//średnia arytmetyczna z końców przedziału, punkt C
-                double rangeCalcC = CalcFunction(rangeC);//wyliczenie wartości funkcji w punkcie C
+                double rangeCalcC = CalcFunction(rangeC, row);//wyliczenie wartości funkcji w punkcie C
                 if (Math.Abs(rangeCalcC) < correction) correctionGained = true;//sprawdzenie czy osiągnięto zadaną dokładność
                 if (rangeCalcA * rangeCalcC < 0)//sprawdzenie czy wartości funkcji mają przeciwne znaki
                 {

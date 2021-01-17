@@ -9,23 +9,23 @@ namespace NumProjApp.Metody
         protected double correction;
         protected int grade;
         protected KeyValuePair<double, double> range;
-        protected List<Rownanie> coefsList;
-        public General(int _grade, double _correction, KeyValuePair<double, double> _range, List<Rownanie> _coefsList)
+        protected Rownanie row;
+        public General(int _grade, double _correction, KeyValuePair<double, double> _range, Rownanie _row)
         {
             correction = _correction;
             grade = _grade;
-            coefsList = _coefsList;
+            row = _row;
             range = _range;
         }
-        protected double CalcFunction(double x)
+        protected double CalcFunction(double x, Rownanie rowToCalc)
         {
             double res = 0;
-            /*foreach (var key in wsp)
+            foreach (var mono in rowToCalc.monos)
             {
-                int grade = key.grade;
+                int grade = mono.grade;
                 double xsqrt = Math.Pow(x, grade);
-                res += xsqrt * key.coef;
-            }*/
+                res += xsqrt * mono.coef;
+            }
             return res;
         }
     }
