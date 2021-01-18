@@ -221,12 +221,34 @@ namespace NumProjApp
         }
         private async void BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
         {
-            args.Cancel = args.NewText.Any(c => !char.IsDigit(c));
+            args.Cancel = IsCancelled(args.NewText);//args.NewText.Any(c => !char.IsDigit(c));
             if(args.Cancel)
             {
                 string error = "Musisz wprowadzić liczbę";
                 await new MessageDialog(error).ShowAsync();
             }
+        }
+        private bool IsCancelled(string textToCheck)
+        {
+            bool isCancelled = false;
+            if(textToCheck.Any(c => char.IsLetter(c)))
+            {
+                isCancelled = true;
+                return isCancelled;
+            }
+            bool containsDot = textToCheck.Any(c => c == '.');
+            if(containsDot)
+            {
+                bool oneDot = textToCheck.Count(c => c == '.') != 1 ? false : true;
+                bool areDigits = textToCheck.Replace('.', '0').Any(c => char.IsDigit(c));
+                if (!oneDot || !areDigits) isCancelled = true;
+            }
+            else
+            {
+                bool containsDigits = textToCheck.Any(c => !char.IsDigit(c));
+                if (containsDigits) isCancelled = true;
+            }
+            return isCancelled;
         }
         #endregion
     }
