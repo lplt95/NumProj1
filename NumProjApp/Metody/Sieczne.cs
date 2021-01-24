@@ -22,9 +22,13 @@ namespace NumProjApp.Metody
             double rangeB = range.Value;
             while (!correctionGained)//pętla wykonujaca obliczenia
             {
-                double rangeC = rangeB - ((rangeCalcA * (rangeB - rangeA)) / (rangeCalcB - rangeCalcA));//obliczenie wartości punktu C ze wzoru
+                double rangeC = rangeB - ((rangeCalcB * (rangeB - rangeA)) / (rangeCalcB - rangeCalcA));//obliczenie wartości punktu C ze wzoru
                 double rangeCalcC = CalcFunction(rangeC, row);
-                if (Math.Abs(rangeCalcC) < correction) correctionGained = true;//sprawdzenie czy osiągnięto zadaną dokładność
+                if (Math.Abs(rangeCalcC) < correction)
+                {
+                    solution = Math.Round(rangeC, 3);
+                    correctionGained = true;//sprawdzenie czy osiągnięto zadaną dokładność
+                }
                 if (rangeCalcA * rangeCalcC < 0)//sprawdzenie czy wartości funkcji mają przeciwne znaki
                 {
                     rangeCalcB = rangeCalcC;//jeśli tak, przypisz wartość C do B

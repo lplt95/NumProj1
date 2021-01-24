@@ -59,10 +59,12 @@ namespace NumProjApp
             {
                 List<Monomial> coefs = new List<Monomial>();
                 KeyValuePair<double, double> range;
+                double correction;
                 try
                 {
                     coefs = ReadCoef(grade);//odczyt współczynników
                     range = ReadRange();//odczyt zakresu działań
+                    correction = (double)cbCorrection.SelectedItem;//odczyt dokładności
                 }
                 catch (ArgumentNullException nullExc)//obsłużenie błędu z pustymi polami
                 {
@@ -82,15 +84,15 @@ namespace NumProjApp
                 switch ((string)cbType.SelectedItem)
                 {
                     case "Metoda Bisekcji":
-                        Bisekcja biMethod = new Bisekcja(grade, 0, range, row);
+                        Bisekcja biMethod = new Bisekcja(grade, correction, range, row);
                         solution = biMethod.CalculateSolution(ref loopCount);
                         break;
                     case "Metoda Siecznych":
-                        Sieczne sieczneMethod = new Sieczne(grade, 0, range, row);
+                        Sieczne sieczneMethod = new Sieczne(grade, correction, range, row);
                         solution = sieczneMethod.CalculateSolution(ref loopCount);
                         break;
                     case "Metoda Stycznych":
-                        Styczne styczneMethod = new Styczne(grade, 0, range, row);
+                        Styczne styczneMethod = new Styczne(grade, correction, range, row);
                         solution = styczneMethod.CalculateSolution(ref loopCount);
                         break;
                 }
@@ -237,11 +239,18 @@ namespace NumProjApp
                 return isCancelled;
             }
             bool containsDot = textToCheck.Any(c => c == '.');
+            bool containsMinus = textToCheck.Any(c => c == '-');
             if(containsDot)
             {
                 bool oneDot = textToCheck.Count(c => c == '.') != 1 ? false : true;
                 bool areDigits = textToCheck.Replace('.', '0').Any(c => char.IsDigit(c));
                 if (!oneDot || !areDigits) isCancelled = true;
+            }
+            else if(containsMinus)
+            {
+                bool oneMinus = textToCheck.Count(c => c == '-') != 1 ? false : true;
+                bool areDigits = textToCheck.Replace('-', '0').Any(c => char.IsDigit(c));
+                if (!oneMinus || !areDigits) isCancelled = true;
             }
             else
             {

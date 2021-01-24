@@ -29,6 +29,7 @@ namespace NumProjApp.Metody
                 double rangeCalcC = CalcFunction(rangeC, row);
                 if (Math.Abs(rangeCalcC) < correction)
                 {
+                    solution = Math.Round(rangeC, 3);
                     correctionGained = true;//sprawdzenie czy osiągnięto zadaną dokładność
                 }
                 else

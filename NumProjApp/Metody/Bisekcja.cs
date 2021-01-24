@@ -25,7 +25,11 @@ namespace NumProjApp.Metody
                 loopCount++;//zwiększenie wartości zmiennej kontrolującej kolejne iteracje pętli
                 double rangeC = (rangeA + rangeB) / 2;//średnia arytmetyczna z końców przedziału, punkt C
                 double rangeCalcC = CalcFunction(rangeC, row);//wyliczenie wartości funkcji w punkcie C
-                if (Math.Abs(rangeCalcC) < correction) correctionGained = true;//sprawdzenie czy osiągnięto zadaną dokładność
+                if (Math.Abs(rangeCalcC) < correction)
+                {
+                    solution = Math.Round(rangeC, 3);
+                    correctionGained = true;//sprawdzenie czy osiągnięto zadaną dokładność
+                }
                 if (rangeCalcA * rangeCalcC < 0)//sprawdzenie czy wartości funkcji mają przeciwne znaki
                 {
                     rangeCalcB = rangeCalcC;//jeśli tak, przypisz wartość C do B

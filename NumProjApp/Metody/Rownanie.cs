@@ -22,17 +22,20 @@ namespace NumProjApp.Metody
             foreach(var mono in monos)
             {
                 if(mono.grade == 0)
+                {}
+                else
                 {
-                    break;
+                    int newGrade = mono.grade - 1;
+                    if (newGrade == 0)
+                    {
+                        newMonos.Add(new Monomial(0, mono.coef));
+                    }
+                    else
+                    {
+                        double newCoef = mono.coef * mono.grade;
+                        newMonos.Add(new Monomial(newGrade, newCoef));
+                    }
                 }
-                int newGrade = mono.grade - 1;
-                if(newGrade == 0)
-                {
-                    newMonos.Add(new Monomial(0, mono.coef));
-                    break;
-                }
-                double newCoef = mono.coef * mono.grade;
-                newMonos.Add(new Monomial(newGrade, newCoef));
             }
             return new Rownanie(grade - 1, newMonos);
         }
